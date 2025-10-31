@@ -34,6 +34,14 @@
 
 <template>
    <!-- TODO: make use of the 'blog-post' component to display the blog posts -->
-
+    <div class="d-flex flex-wrap gap-3 justify-content-center mt-3">
+        <blog-post
+            v-for="(post, index) in posts"
+            :key="index"
+            :subject="post.subject"
+            :entry="post.entry"
+            :mood="post.mood"
+        />
+    </div>
 </template>
 

@@ -14,7 +14,9 @@
                 this.deadline = ''
             },
             // TODO: Add a new method, to delete a task completed
-            
+            deleteTask(index) {
+                this.taskList.splice(index, 1)
+            }
         }
     }
 
@@ -34,7 +36,13 @@
     <hr>
 
     <!-- TODO: Modify following code -->
-    <task-tracker ></task-tracker>
+    <task-tracker
+        v-for="(task, index) in taskList"
+        :key="index"
+        :task="task"
+        :idx="index"
+        @done="deleteTask"
+    />
 
 </template>
 

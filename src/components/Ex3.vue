@@ -33,15 +33,34 @@
             })
         },
         methods: {
-            deletePost(id) {
-                // TODO: Complete the delete method
+            async deletePost(id) {
+                try {
+                    await axios.get(`${this.baseUrl}/deletePost`, { params: { id } })
+                    this.posts = this.posts.filter(post => post.id !== id)
+                    alert(`Post with id ${id} deleted.`)
+                } catch (error) {
+                    alert(`Failed to delete post: ${error.message}`)
+                }
             }
         }
     }
 </script>
 
 <template>
-   <!-- TODO: make use of the 'blog-post' component to display the blog posts -->
-
+    <!-- TODO: make use of the 'blog-post' component to display the blog posts -->
+    <div class="d-flex flex-wrap gap-3 justify-content-center mt-3">
+        <blog-post
+            v-for="(post, index) in posts"
+            :key="index"
+            :id="post.id"
+            :subject="post.subject"
+            :entry="post.entry"
+            :mood="post.mood"
+        >
+            <button class="btn btn-danger btn-sm mt-2" @click="deletePost(post.id)">
+                Delete
+            </button>
+        </blog-post>
+    </div>
 </template>
 
